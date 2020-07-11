@@ -36,11 +36,12 @@ namespace DK.EFCore.SQLiteCodeFrist
                 var services = new ServiceCollection();
                 
                 services.AddDbContext<AMCDBContext>(options => options.UseSqlite(configuration.GetConnectionString("SqliteDB"), options => options.MaxBatchSize(512)));
-                services.AddDbContext<AMCDBContext>(options => options.EnableDetailedErrors());
-                //optionsBuilder.EnableSensitiveDataLogging();
+                services.AddDbContext<AMCDBContext>(options => options.EnableSensitiveDataLogging());
 
+                /*Adding AMC implementation to Dependency Injection*/
                 services.AddTransient<Data.Services.IAMCData, Data.Services.AMCData>();
 
+                /*Fetching AMC implementation from DI*/
                 var provider = services.BuildServiceProvider();
                 var quary = provider.GetService<Data.Services.IAMCData>();
 
@@ -51,7 +52,7 @@ namespace DK.EFCore.SQLiteCodeFrist
                 var rec = await quary.GetAMCSAsync();
                 foreach (var item in rec)
                 {
-                    Console.WriteLine(item.AMCTitle);
+                    Console.WriteLine($"{item.AMCId}  -  {item.AMCTitle}  -  {item.InDate}");
                 }
 
                 /* Direct fetching data from DBContext */
