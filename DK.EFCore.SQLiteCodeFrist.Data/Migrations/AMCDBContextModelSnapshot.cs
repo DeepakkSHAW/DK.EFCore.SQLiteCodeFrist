@@ -28,8 +28,11 @@ namespace DK.EFCore.SQLiteCodeFrist.Data.Migrations
                         .HasMaxLength(100);
 
                     b.Property<DateTime?>("InDate")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasColumnName("inDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.HasKey("AMCId");
 

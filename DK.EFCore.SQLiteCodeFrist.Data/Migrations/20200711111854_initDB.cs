@@ -14,7 +14,7 @@ namespace DK.EFCore.SQLiteCodeFrist.Data.Migrations
                     AMCId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     AMCTitle = table.Column<string>(maxLength: 100, nullable: false),
-                    inDate = table.Column<DateTime>(nullable: true)
+                    inDate = table.Column<DateTime>(nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
                 },
                 constraints: table =>
                 {

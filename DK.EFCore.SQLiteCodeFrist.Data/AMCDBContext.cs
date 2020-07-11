@@ -40,6 +40,15 @@ namespace DK.EFCore.SQLiteCodeFrist.Data
             modelBuilder.Entity<AMC>(entity => { entity.HasKey(p => p.AMCId); });
             modelBuilder.Entity<MutualFund>(entity => { entity.HasKey(p => p.MutualFundId); });
 
+            /*Set Default Value as current date time to inDate Field*/
+            modelBuilder.Entity<AMC>()
+                  .Property(c => c.InDate)
+                  .IsRequired()
+                   //.HasDefaultValueSql("getutcdate()");   //for sql server
+                  .HasDefaultValueSql("CURRENT_TIMESTAMP"); //for sqlite
+
+
+
             /*declare the One-2-Many relationship*/
             modelBuilder.Entity<AMC>()
                 .HasMany(m => m.MutualFunds)

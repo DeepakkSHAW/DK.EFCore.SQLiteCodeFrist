@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DK.EFCore.SQLiteCodeFrist.Data.Migrations
 {
     [DbContext(typeof(AMCDBContext))]
-    [Migration("20200711103720_initDB")]
+    [Migration("20200711111854_initDB")]
     partial class initDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,8 +30,11 @@ namespace DK.EFCore.SQLiteCodeFrist.Data.Migrations
                         .HasMaxLength(100);
 
                     b.Property<DateTime?>("InDate")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasColumnName("inDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.HasKey("AMCId");
 
